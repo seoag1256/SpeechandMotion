@@ -8,11 +8,15 @@ let poseNet;
 let poses = [];
 
 let pkeyHandX, pkeyHandY, keyHandX, keyHandY;
-
+let img;
+function preload(){
+   imgA = loadImage("01.jpg");
+   imgB = loadImage("02.jpg");
+}
 function setup() {
   createCanvas(640, 360);
   directionX = 1;
-
+  textSize(30);
   speechRec = new p5.SpeechRec("ko-KR", gotSpeech);
   let continuous = true;
   let interimResults = false;
@@ -48,23 +52,24 @@ function draw() {
 function drawKeypoints() {
   for (let i = 0; i < poses.length; i++) {
     let pose = poses[i].pose;
-    let keypoint = pose.keypoints[9];
+    let keypoint = pose.keypoints[10];
     if (keypoint.score > 0.2) {
       keyHandX = pkeyHandX;
       keyHandY = pkeyHandY;
       pkeyHandX = keypoint.position.x;
       pkeyHandY = keypoint.position.y;
 
-      // if (keyHandX < keyHandX) {
         if(keyHandX > width/2){
         directionX = -1;
+        image(imgA, keyHandX-125, keyHandY, 250, 250);
       }
       if(keyHandX < width/2){
-      // if (keyHandX >= keyHandX) {
         directionX = 1;
+        image(imgA, keyHandX-125, keyHandY, 250, 250);
       }
       for (var j = 0; j < word.length; j++) {
-        text(word[j], keyHandX + directionX * j * 10, random(keyHandY - 3, keyHandY + 3));
+        //image(imgA, keyHandX-125, keyHandY, 250, 250);
+        text(word[j], keyHandX + directionX * j * 25, random(keyHandY - 3, keyHandY + 3));
         console.log(word[j]);
       }
     }
