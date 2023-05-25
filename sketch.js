@@ -11,7 +11,6 @@ let pkeyHandX, pkeyHandY, keyHandX, keyHandY;
 let img;
 function preload(){
    imgA = loadImage("01.jpg");
-   imgB = loadImage("02.jpg");
 }
 function setup() {
   createCanvas(640, 360);
@@ -68,7 +67,6 @@ function drawKeypoints() {
         image(imgA, keyHandX-125, keyHandY, 250, 250);
       }
       for (var j = 0; j < word.length; j++) {
-        //image(imgA, keyHandX-125, keyHandY, 250, 250);
         text(word[j], keyHandX + directionX * j * 25, random(keyHandY - 3, keyHandY + 3));
         console.log(word[j]);
       }
